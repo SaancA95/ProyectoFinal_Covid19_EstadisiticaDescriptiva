@@ -2,7 +2,7 @@
 # Proyecto Final Grupo Nº2
 ## Dataset Covid 19
 
-![](https://github.com/SaancA95/ProyectoFinal_Covid19_EstadisiticaDescriptiva/blob/main/descarga.png)
+![](https://github.com/SaancA95/ProyectoFinal_Covid19_EstadisiticaDescriptiva/blob/main/covid-removebg-preview.png)
 
 ------------
 
