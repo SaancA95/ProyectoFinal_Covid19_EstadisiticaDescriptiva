@@ -118,8 +118,6 @@ En las caracteristicas tomar en cuenta que:
   
 #### Funcionamiento del proyecto
 
-##### Tablas de Frecuencia
-
 En primer lugar cargamos nuestro conjunto de datos 
 
 ```javascript
@@ -131,6 +129,8 @@ FechaMuerte <- (data$DATE_DIED)
 EdadPaciente <- (data$AGE)
 Genero <- (data$SEX)
 ```
+
+##### Tablas de Frecuencia
 Calculamos las frecuencias de FechaMuerte, Edad y Genero
 ```javascript
 frecuencia_fecha <- table(FechaMuerte)
@@ -161,4 +161,178 @@ frec_acum_relativa_fecha <- cumsum(frecuencia_fecha) / sum(frecuencia_fecha) * 1
 frec_acum_relativa_edad <- cumsum(frecuencia_edad) / sum(frecuencia_edad) * 100
 frec_acum_relativa_genero <- cumsum(frecuencia_genero) / sum(frecuencia_genero) * 100
 ```
+
+Creamos dataframes para poder visualizar los datos previamente creados en una tabla
+```javascript
+resultadofecha <- data.frame(
+  Fecha = as.Date(names(frecuencia_fecha)),
+  Frecuencia = frecuencia_fecha,
+  FrecuenciaRelativa = frec_relativa_fecha,
+  FrecuenciaAcumulada = frec_acumulada_fecha,
+  FrecuenciaAcumuladaRelativa = frec_acum_relativa_fecha
+)
+
+resultadoedad <- data.frame(
+  Edad = as.integer(names(frecuencia_edad)),
+  Frecuencia = frecuencia_edad,
+  FrecuenciaRelativa = frec_relativa_edad,
+  FrecuenciaAcumulada = frec_acumulada_edad,
+  FrecuenciaAcumuladaRelativa = frec_acum_relativa_edad
+)
+
+resultadogenero <- data.frame(
+  Genero = names(frecuencia_genero),
+  Frecuencia = frecuencia_genero,
+  FrecuenciaRelativa = frec_relativa_genero,
+  FrecuenciaAcumulada = frec_acumulada_genero,
+  FrecuenciaAcumuladaRelativa = frec_acum_relativa_genero
+)
+
+```
+Visualizamos los datos de la siguiente forma
+```javascript
+print("Resultados de la Tabla de Frecuencia para Fecha de Muerte:")
+View(resultadofecha)
+
+print("Resultados de la Tabla de Frecuencia para Edad:")
+View(resultadoedad)
+
+print("Resultados de la Tabla de Frecuencia Género:")
+View(resultadogenero)
+```
+##### Histogramas
+Para la interpretacion de la sintasix de los histogramas es una representacion grafica de los datos que tenemos seleccionados de nuestro dataset
+
+```javascript
+# Histograma para Edad
+hist(EdadPaciente, main = "Histograma Edad", xlab = "Edad")
+
+# Histograma para Genero
+hist(Genero, main = "Histograma Género", xlab = "Género")
+```
+##### Poligonos de frecuencia
+
+```javascript
+PoligonoFrecuencia<-function(vector){
+  hg<-hist(vector)
+  polygon.freq(hg, lwd=5,col="red")
+}
+
+PoligonoFrecuencia(EdadPaciente)
+PoligonoFrecuencia(Genero)
+```
+NOTA: La columna fecha no se puede interpretar en un poligono de frecuencia e  histograma ya que solo admite datos numericos para representar estos graficos
+
+#### Media
+
+La media, también conocida como promedio, es una medida estadística que representa el valor típico o central de un conjunto de datos numéricos. En este caso vamos a representar la media de la edad de los pacientes
+
+```javascript
+MediaEdad <- mean(EdadPaciente)
+```
+
+#### Mediana
+La mediana es otro tipo de medida de tendencia central que representa el valor central de un conjunto de datos ordenados.En este caso vamos a calcular la mediana de los datos de la edad de los pacientes
+
+```javascript
+mediana<-function(vec){
+  paste("la mediana de su variable:", median(sort(vec)))
+}
+
+mediana(EdadPaciente)
+```
+#### Moda
+La moda es el valor que aparece con mayor frecuencia en un conjunto de datos. En otras palabras, es el valor que ocurre con mayor frecuencia. Vamos a sacar el mayor valor a partir de la edad de los pacientes
+
+```javascript
+moda<-function(vec){
+  return(as.numeric(
+    names(which.max(table(vec)))))
+}
+
+moda(EdadPaciente)
+```
+#### Varianza Muestral
+La varianza es una medida de dispersión que representa la media de los cuadrados de las desviaciones de cada valor con respecto a la media del conjunto de datos. Calculemos a partir de la edad
+
+```javascript
+varianza <- function(vector){
+  return(var(vector,na.rm=FALSE))
+}
+
+varianza(EdadPaciente)
+```
+#### Desviacion Estandar
+La desviación estándar es la raíz cuadrada de la varianza y proporciona una medida de dispersión en las mismas unidades que los datos originales. Veamos el calculo a partir de la edad
+```javascript
+desviacion <- function(q){
+  a <- varianza(q)
+  valora <- sqrt(a)
+  paste("La desviacion estandar es:",valora)
+}
+
+desviacion(EdadPaciente)
+```
+#### Coeficiente de Variacion
+El coeficiente de variación (CV) es una medida de la variabilidad relativa de un conjunto de datos en relación con su media. Se calcula como el cociente entre la desviación estándar y la media del conjunto de datos, multiplicado por 100 para expresarlo como un porcentaje. Para el calulo del CV para la edad de los pacientes realizamos
+
+```javascript
+coeficienteVariacion<-function(vector){
+  return(paste("mi coeficiente de variacion es: ",cv(vector)))
+}
+
+coeficienteVariacion(EdadPaciente)
+```
+#### Cuartiles
+Los cuartiles dividen un conjunto de datos ordenados en cuatro partes iguales, cada una representando el 25% de los datos. Los tres cuartiles son:
+
+- Primer cuartil (Q1): El valor por debajo del cual se encuentra el 25% de las edades los pacientes.
+- Segundo cuartil (Q2): Es igual a la mediana, divide los datos en dos partes iguales de los edades de los pacientes.
+- Tercer cuartil (Q3): El valor por debajo del cual se encuentra el 75% de las edades de los pacientes.
+  
+```javascript
+cuartiles<-function(vec){
+  q<-quantile(vec,
+              probs=c(0.25,0.5,0.75))
+  return(q)
+}
+
+cuartiles(EdadPaciente)
+```
+#### Deciles
+Los deciles dividen un conjunto de datos ordenados en diez partes iguales, cada una representando el 10% de los datos. Los nueve deciles se conocen como D1, D2, ..., D9.
+```javascript
+deciles<-function(vec){
+  d<-quantile(vec,
+              probs<-seq(0.1, 0.9, by=0.1))
+  return(d)
+}
+
+deciles(EdadPaciente)
+```
+#### Percentiles
+Los percentiles dividen un conjunto de datos ordenados en cien partes iguales, cada una representando el 1% de los datos. Los percentiles son valores que indican el porcentaje de observaciones que están por debajo de un determinado valor en el conjunto de datos.
+
+```javascript
+percentiles<-function(vec){
+  p<-quantile(vec,
+              probs<-seq(0.01,0.99,by=0.01))
+  return(p)
+}
+
+table(percentiles(EdadPaciente))
+```
+### Funciones especiales
+
+#### - Función de Cálculo de Diferencias en Meses:
+Esta función toma un conjunto de datos data, una columna que contiene fechas columna_fecha y una fecha de inicio startDate. Luego, filtra las fechas no válidas (aquellas que tienen valor "9999-99-99"), define una fecha de referencia y calcula las diferencias en meses entre cada fecha en la columna y la fecha de referencia. La función devuelve un vector con las diferencias en meses.
+
+
+
+
+NOTA: No tiene sentido calcular la media,mediana,moda,etc. Para FechaMuerte y Genero, ya que son variables categóricas.
+
+
+
+
 
