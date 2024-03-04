@@ -322,16 +322,108 @@ percentiles<-function(vec){
 
 table(percentiles(EdadPaciente))
 ```
+
+NOTA: No tiene sentido calcular la media,mediana,moda,etc. Para FechaMuerte y Genero, ya que son variables categóricas.
+
 ### Funciones especiales
 
 #### - Función de Cálculo de Diferencias en Meses:
 Esta función toma un conjunto de datos data, una columna que contiene fechas columna_fecha y una fecha de inicio startDate. Luego, filtra las fechas no válidas (aquellas que tienen valor "9999-99-99"), define una fecha de referencia y calcula las diferencias en meses entre cada fecha en la columna y la fecha de referencia. La función devuelve un vector con las diferencias en meses.
 
+```javascript
+calcular_diferencias_meses <- function(data, columna_fecha, startDate) {
+  # Filtra fechas no válidas
+  data_filtrado <- data[!data[, columna_fecha] %in% c("9999-99-99", ""), ]
+  
+  # Define la fecha de referencia
+  fecha_referencia <- dmy(startDate)  # Cambia la fecha según tus necesidades
+  
+  # Calcula las diferencias en meses para cada fecha (vectorización)
+  meses <- as.numeric(interval(fecha_referencia, dmy(data_filtrado[, columna_fecha])) / months(1))
+  
+  # Imprime el vector de diferencias en meses
+  print(meses)
+  
+  # Retornar el vector de diferencias en meses
+  return(meses)
+}
+
+# Supongamos que la columna de fechas se llama 'DATE_DIED'
+columna_fecha <- "DATE_DIED"
+startDATE <- "01-12-2019"
+
+# Llama a la función con los parámetros adecuados
+resultado_diferencias <- calcular_diferencias_meses(data, columna_fecha, startDATE)
+```
+#### - Funcion y Graficos de BINARIO (HOMBRES Y MUJERES):
+Calcula las frecuencias de los valores en la columna binaria (suponiendo que 1 representa a mujeres y 2 a hombres), calcula los porcentajes de cada valor, imprime las frecuencias y porcentajes, y crea dos gráficos: un gráfico de barras que muestra la frecuencia de mujeres y hombres, y un gráfico circular (torta) que muestra el porcentaje de mujeres y hombres. Los colores 'pink' y 'blue' se utilizan para representar mujeres y hombres respectivamente.
+
+```javascript
+# Calcula la frecuencia de cada valor en la columna binaria
+frecuencias <- table(Genero)
+
+# Calcula el porcentaje de cada valor
+porcentajes <- prop.table(frecuencias) * 100
+
+# Imprime las frecuencias y porcentajes
+cat("Frecuencias:\n")
+print(frecuencias)
+
+cat("\nPorcentajes:\n")
+print(porcentajes)
+
+# Crea un gráfico de barras
+barplot(frecuencias, main = "Frecuencia de Mujeres y Hombres", col = c("pink", "blue"), names.arg = c("Mujeres", "Hombres"))
+
+# Crea un gráfico circular (torta) con porcentajes
+pie(porcentajes, main = "Porcentaje de Mujeres y Hombres", col = c("pink", "blue"), labels = c("Mujeres", "Hombres"))
+```
+#### - DIAGRAMA DE PARETO
+Es una combinación de un gráfico de barras y una línea que muestra los valores acumulados de las barras, ordenados de mayor a menor. Se utiliza para identificar las causas principales que contribuyen a un resultado.
+
+```javascript
+
+# Definimos los límites de los rangos de edades
+limites_rangos <- c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+# Creamos un nuevo factor con los rangos de edades
+rangos_edades <- cut(EdadPaciente, breaks = limites_rangos, include.lowest = TRUE)
+
+# Calculamos las frecuencias de cada rango
+frecuencias <- table(rangos_edades)
+
+# Calculamos las frecuencias ordenadas en orden descendente
+frecuencias_ordenadas <- sort(frecuencias, decreasing = TRUE)
+
+# Calculamos la frecuencia acumulada
+frecuencia_acumulada <- cumsum(frecuencias_ordenadas)
+
+# Calculamos el porcentaje acumulado
+porcentaje_acumulado <- (frecuencia_acumulada / sum(frecuencias_ordenadas)) * 100
+
+# Creamos el diagrama de Pareto
+barplot(frecuencias_ordenadas, main = "Diagrama de Pareto para Edades", col = "pink",
+        names.arg = levels(rangos_edades), xlab = "Rangos de Edades", ylab = "Frecuencia",
+        ylim = c(0, max(frecuencias_ordenadas) * 1.2))
+par(new = TRUE)
+plot(porcentaje_acumulado, type = "b", col = "blue", pch = 20, axes = FALSE, xlab = "", ylab = "", ylim = c(0, 100))
+axis(side = 4)
+mtext("Porcentaje Acumulado (%)", side = 4, line = 3)
+```
+#### DIAGRAMA DE CAJA
+Es un gráfico que muestra la distribución de un conjunto de datos numéricos a través de sus cuartiles. Es útil para visualizar la dispersión y los valores atípicos en los datos.
 
 
+```javascript
+# Cargamos la librería ggplot2
+library(ggplot2)
 
-NOTA: No tiene sentido calcular la media,mediana,moda,etc. Para FechaMuerte y Genero, ya que son variables categóricas.
-
+# Creamos el diagrama de caja
+ggplot(data = NULL, aes(y = EdadPaciente)) +
+  geom_boxplot(fill = "lightblue", color = "blue") +
+  labs(title = "Diagrama de Caja", y = "Datos") +
+  theme_minimal()
+```
 
 
 
