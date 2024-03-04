@@ -110,17 +110,26 @@ En las caracteristicas tomar en cuenta que:
 - **ggplot2:** es una librería ampliamente utilizada para la creación de gráficos en R. Ofrece una gramática de gráficos que permite crear gráficos complejos de manera fácil e intuitiva. Con ggplot2, puedes crear una amplia variedad de gráficos, desde simples diagramas de dispersión hasta gráficos estadísticos complejos con múltiples capas y facetas.
 - **lubridate:** lubridate es una librería diseñada para facilitar la manipulación de fechas y horas en R. Proporciona funciones sencillas y coherentes para realizar operaciones comunes con fechas, como sumar días, calcular la diferencia entre fechas, extraer componentes de fechas (día, mes, año, etc.), y mucho más. Es especialmente útil para el análisis de datos temporales y series de tiempo.
  
-####Aplicaciones Implementadas
+#### Aplicaciones Implementadas
 **RStudio:** lenguaje de programación R. Ofrece una interfaz gráfica amigable y funcionalidades diseñadas específicamente para facilitar el trabajo con R, lo que lo convierte en una herramienta popular entre los científicos de datos, analistas estadísticos y programadores que utilizan R para análisis de datos y modelado estadístico.
 
 - **Version** -> 2023.12.1+402
 - **Editor** -> Posit Software
   
-####Funcionamiento del proyecto
+#### Funcionamiento del proyecto
 
-#####Tablas de Frecuencia
+##### Tablas de Frecuencia
+
+En primer lugar cargamos nuestro conjunto de datos 
 
 ```javascript
-hola
+data <- read.csv(file.choose())
 ```
+Creamos las varibles donde se van estar alojadas nuestras columnas que vamos a usar
+```javascript
+FechaMuerte <- (data$DATE_DIED)
+EdadPaciente <- (data$AGE)
+Genero <- (data$SEX)
+```
+
 
