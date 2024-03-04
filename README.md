@@ -425,6 +425,7 @@ ggplot(data = NULL, aes(y = EdadPaciente)) +
   theme_minimal()
 ```
 
+### Conclusiones
 
-
+En si el proyecto como tal busca un estudio estadistico profundo sobre todas las medidas aplicadas sobre analisis estadistico y descriptivo, el proyecto comprende informacion sobre lo que es un estudio estadistico sobre pacientes diagnosticados sobre covid 19 y sus enfermedades adyacentes que padecen como diabetes, hipertension arterial, etc. Ademas en si comprendemos que para manejar estos datos tuvimos que separar por ciertos intervalos, ya que en si comprendia alrededor de 1000000 personas registradas en este dataset. Por ejemplo para poder representar de manera ordenada estos diagramas y demas, por lo general saben estar dispersos los datos y esto complicaria de manera grave nuestra muestra de datos. Tambien podemos ver de que realizamos al final ciertas funciones adicionales para un estudio mas especifico como la Funcion y Graficos de BINARIO (HOMBRES Y MUJERES) y Función de Cálculo de Diferencias en Meses. En conclusion diremos que el proyecto trata de buscar un enfoque claro de como el lector al introducirse a explorar este tipo de datos tenga una idea clara y consisa con toda esta informacion proporcionada anteriormente
 
