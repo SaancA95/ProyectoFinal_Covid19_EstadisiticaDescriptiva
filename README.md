@@ -125,11 +125,40 @@ En primer lugar cargamos nuestro conjunto de datos
 ```javascript
 data <- read.csv(file.choose())
 ```
-Creamos las varibles donde se van estar alojadas nuestras columnas que vamos a usar
+Creamos las variables donde se van estar alojadas nuestras columnas que vamos a usar
 ```javascript
 FechaMuerte <- (data$DATE_DIED)
 EdadPaciente <- (data$AGE)
 Genero <- (data$SEX)
 ```
-
+Calculamos las frecuencias de FechaMuerte, Edad y Genero
+```javascript
+frecuencia_fecha <- table(FechaMuerte)
+frecuencia_edad <- table(EdadPaciente)
+frecuencia_genero <- table(Genero)
+```
+Creamos una secuencia de numeros basada en las frecuencias
+```javascript
+datos_fecha <- rep(1:length(frecuencia_fecha), frecuencia_fecha)
+datos_edad <- rep(1:length(frecuencia_edad), frecuencia_edad)
+datos_genero <- rep(1:length(frecuencia_genero), frecuencia_genero)
+```
+Calculamos la frecuencia relativa (%)
+```javascript
+frec_relativa_fecha <- frecuencia_fecha / sum(frecuencia_fecha) * 100
+frec_relativa_edad <- frecuencia_edad / sum(frecuencia_edad) * 100
+frec_relativa_genero <- frecuencia_genero / sum(frecuencia_genero) * 100
+```
+Calculamos la frecuencia acumulada
+```javascript
+frec_acumulada_fecha <- cumsum(frecuencia_fecha)
+frec_acumulada_edad <- cumsum(frecuencia_edad)
+frec_acumulada_genero <- cumsum(frecuencia_genero)
+```
+Calculamos la frecuencia acumulada relativa (%)
+```javascript
+frec_acum_relativa_fecha <- cumsum(frecuencia_fecha) / sum(frecuencia_fecha) * 100
+frec_acum_relativa_edad <- cumsum(frecuencia_edad) / sum(frecuencia_edad) * 100
+frec_acum_relativa_genero <- cumsum(frecuencia_genero) / sum(frecuencia_genero) * 100
+```
 
