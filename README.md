@@ -101,5 +101,26 @@ En las caracteristicas tomar en cuenta que:
 
 - **fecha de fallecimiento:** Si el paciente falleció indicar la fecha de fallecimiento, y 9999-99-99 en caso contrario.
 
+#### Librerias implementadas: 
 
+- **agricolae:** Esta librería proporciona herramientas para análisis estadístico y experimentación agronómica. Incluye funciones para realizar análisis de varianza, pruebas de comparación múltiple, análisis de regresión, entre otros, que son comunes en estudios agrícolas y experimentos.
+- **gtools:** Es una colección de funciones que amplían las capacidades básicas de R. Incluye funciones útiles para el manejo de datos, manipulación de vectores, operaciones con matrices, manipulación de strings, entre otros. Esta librería es muy útil para tareas de programación y análisis de datos.
+- **qcc:** qcc (Quality Control Charts) es una librería utilizada para crear gráficos de control de calidad, que son herramientas comúnmente utilizadas en la industria para monitorear y controlar la calidad de los procesos. Permite la creación de gráficos como gráficos de control Shewhart, gráficos CUSUM, gráficos EWMA, entre otros, que son esenciales para el control de calidad en diversos campos.
+- **raster:** raster es una librería utilizada para el análisis y manipulación de datos raster, es decir, datos que representan información geoespacial en forma de cuadrículas. Permite la lectura, escritura, manipulación y análisis de datos raster, así como la realización de operaciones espaciales avanzadas y modelado de datos geoespaciales.
+- **ggplot2:** es una librería ampliamente utilizada para la creación de gráficos en R. Ofrece una gramática de gráficos que permite crear gráficos complejos de manera fácil e intuitiva. Con ggplot2, puedes crear una amplia variedad de gráficos, desde simples diagramas de dispersión hasta gráficos estadísticos complejos con múltiples capas y facetas.
+- **lubridate:** lubridate es una librería diseñada para facilitar la manipulación de fechas y horas en R. Proporciona funciones sencillas y coherentes para realizar operaciones comunes con fechas, como sumar días, calcular la diferencia entre fechas, extraer componentes de fechas (día, mes, año, etc.), y mucho más. Es especialmente útil para el análisis de datos temporales y series de tiempo.
+ 
+####Aplicaciones Implementadas
+**RStudio:** lenguaje de programación R. Ofrece una interfaz gráfica amigable y funcionalidades diseñadas específicamente para facilitar el trabajo con R, lo que lo convierte en una herramienta popular entre los científicos de datos, analistas estadísticos y programadores que utilizan R para análisis de datos y modelado estadístico.
+
+- **Version** -> 2023.12.1+402
+- **Editor** -> Posit Software
+  
+####Funcionamiento del proyecto
+
+#####Tablas de Frecuencia
+
+```javascript
+hola
+```
 
